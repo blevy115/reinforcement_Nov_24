@@ -34,6 +34,23 @@ end
 end
 total_votes = total_votes.sort_by{|name, votes| votes }.reverse
 
+
+
+total_votes.each_with_index do |c,i|
+  if total_votes[i][1] == total_votes[i-1][1]
+    total_votes[i][0] = (total_votes[i][0] + ' and ' + total_votes[i-1][0])
+    total_votes[i-1][0] = 'delete'
+  end
+
+end
+
+total_votes.each do |c|
+  if c[0]=='delete'
+    total_votes.delete(c)
+  end
+end
+
+
 total_votes.each_with_index do |(name, votes), index|
   puts "Position #{index + 1} goes to #{name} with #{votes} votes!"
 end
